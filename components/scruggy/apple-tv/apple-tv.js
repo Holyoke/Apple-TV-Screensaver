@@ -53,6 +53,12 @@ FamousFramework.component('scruggy:apple-tv', {
             for(var i = 0; i < $state.get('srcs').length; i++) {
               //get current values
               var currentZ = $state.get(['positionZ', i]);
+
+              //if image is out of screen move it back to bottom
+              if(currentZ < -$state.get('contextSize')) {
+                currentZ = $state.get('contextSize')+100;
+              }
+              
               //set new decremented value
               $state.set(['positionZ', i], currentZ-1);
             }
