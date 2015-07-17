@@ -21,6 +21,9 @@ FamousFramework.component('scruggy:apple-tv', {
     },
     '.gallery-item':{
       'size': [100, 100],
+      'content': function($index, srcs) {
+        return `<img src="${ srcs[$index] }" style="height:100px;width:100px"/>`;
+      },
       'style': {
         'background-color': 'blue',
         'border': '2px solid black'
@@ -43,9 +46,14 @@ FamousFramework.component('scruggy:apple-tv', {
   events: {},
   states: {
     rotationValue: 0,
-    srcs: [1,2,3,4,5],
+    srcs: imageData,
     contextSize: 500,
     positionZ:[]
   },
   tree: 'apple-tv.html'
-});
+}).config({
+  includes: [
+    'galleryData.js',
+    'apple-tv.css'
+  ]
+})
