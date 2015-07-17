@@ -33,3 +33,13 @@ var imageData = [
    'http://demo.famo.us.s3.amazonaws.com/hub/apps/carousel/Museo_del_Prado_-_Goya_-_Caprichos_-_No._33_-_Al_Conde_Palatino_thumb.jpg',
    'http://demo.famo.us.s3.amazonaws.com/hub/apps/carousel/Museo_del_Prado_-_Goya_-_Caprichos_-_No._34_-_Las_rinde_el_SueC3B1o_thumb.jpg'
 ];
+
+var contextSize = window.innerHeight;
+
+function randomCoordinates(imageData) {
+  var result = [];
+  for(var i = 0; i < imageData.length; i++) {
+    result.push(Math.floor(contextSize/2+100+Math.random()*contextSize*2));
+  }
+  return result;
+}

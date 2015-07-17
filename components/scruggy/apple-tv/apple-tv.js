@@ -47,8 +47,8 @@ FamousFramework.component('scruggy:apple-tv', {
   states: {
     rotationValue: 0,
     srcs: imageData,
-    contextSize: 500,
-    positionZ:[]
+    contextSize: contextSize,
+    positionZ: randomCoordinates(imageData)
   },
   tree: 'apple-tv.html'
 }).config({
