@@ -13,10 +13,9 @@ FamousFramework.component('scruggy:apple-tv', {
       'mount-point': [0.5, 0.5],
       'origin': [0.5, 0.5],
       'style': {
-        'background': 'red'
       },
       'rotation': function(rotationValue){
-        return [-Math.PI/2.1, 0, rotationValue];
+        return [-Math.PI/2, 0, rotationValue];
       },
     },
     '.gallery-item':{
@@ -39,6 +38,11 @@ FamousFramework.component('scruggy:apple-tv', {
       },
       'position-z': function($index, positionZ) {
         return positionZ[$index];
+      },
+      '#rotator-node': {
+        'position-z': function(rootZ) {
+          return rootZ;
+        }
       },
       'rotation': [Math.PI / 2, 0 ,0]
     }
@@ -81,6 +85,16 @@ FamousFramework.component('scruggy:apple-tv', {
                       duration: 2000,
                       curve: 'easeOut'
         });
+
+        //emphasis
+        $state.set('rootZ', -250, {
+          duration: 1000,
+          curve: 'easeOut'
+        })
+        .thenSet('rootZ', 0, {
+          duration: 200,
+          curve: 'easeInOut'
+        });
       }
     }
   },
@@ -88,7 +102,8 @@ FamousFramework.component('scruggy:apple-tv', {
     rotationValue: 0,
     srcs: imageData,
     contextSize: contextSize,
-    positionZ: randomCoordinates(imageData)
+    positionZ: randomCoordinates(imageData),
+    rootZ: 0
   },
   tree: 'apple-tv.html'
 }).config({
