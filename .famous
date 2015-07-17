@@ -1,0 +1,1 @@
+{"scripts":{"deploy-folder":"public/build/scruggy~apple-tv","deploy":[],"setup":[["install"],["run","local-only-bootstrap","--","--watchAfterBuild=no"]]}}

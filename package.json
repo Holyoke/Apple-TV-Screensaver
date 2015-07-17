@@ -1,0 +1,16 @@
+{
+  "name": "famous-framework-scruggy-apple-tv",
+  "version": "0.0.0",
+  "description": "A Famous Framework component",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "copy-core-components": "famous-framework copy-core-components --destinationFolder=components/famous",
+    "local-only-bootstrap": "famous-framework local-only-bootstrap --sourceFolder=components --destinationFolder=public/build --servedFolder=public --port=1618",
+    "dev": "npm run local-only-bootstrap",
+    "postinstall": "npm run copy-core-components"
+  },
+  "dependencies": {
+    "famous-framework": "Famous/framework#v0.12.1"
+  }
+}
