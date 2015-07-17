@@ -22,7 +22,7 @@ FamousFramework.component('scruggy:apple-tv', {
     '.gallery-item':{
       'size': [100, 100],
       'content': function($index, srcs) {
-        return `<img src="${ srcs[$index] }" style="height:100px;width:100px"/>`;
+        return `<img src="${ srcs[$index] }" style="height:100px;width:100px"/>`
       },
       'style': {
         'background-color': 'blue',
@@ -43,7 +43,28 @@ FamousFramework.component('scruggy:apple-tv', {
       'rotation': [Math.PI / 2, 0 ,0]
     }
   },
-  events: {},
+  events: {
+    '$lifecycle': {
+      'post-load': function($state, $famousNode) {
+        //add a compmonent with an `onUpdate` method
+        var id = $famousNode.addComponent({
+          onUpdate: function(time) {
+            //go through all the 'positionZ' values
+            for(var i = 0; i < $state.get('srcs').length; i++) {
+              //get current values
+              var currentZ = $state.get(['positionZ', i]);
+              //set new decremented value
+              $state.set(['positionZ', i], currentZ-1);
+            }
+            //add self to the update queue and create loop
+            $famousNode.requestUpdateOnNextTick(id);
+          }
+        });
+        //start the loop
+        $famousNode.requestUpdateOnNextTick(id);
+      }
+    }
+  },
   states: {
     rotationValue: 0,
     srcs: imageData,
