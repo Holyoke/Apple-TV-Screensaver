@@ -58,7 +58,7 @@ FamousFramework.component('scruggy:apple-tv', {
               if(currentZ < -$state.get('contextSize')) {
                 currentZ = $state.get('contextSize')+100;
               }
-              
+
               //set new decremented value
               $state.set(['positionZ', i], currentZ-1);
             }
@@ -68,6 +68,19 @@ FamousFramework.component('scruggy:apple-tv', {
         });
         //start the loop
         $famousNode.requestUpdateOnNextTick(id);
+      },
+      //this is a selector
+    },
+    '.gallery-item': {
+      'click': function($state) {
+        $state.set('rotationValue', $state.get('rotationValue') - Math.PI/2, {
+                      duration: 1000,
+                      curve: 'easeIn'
+        })
+        .thenSet('rotationValue', $state.get('rotationValue') - (Math.PI*2), {
+                      duration: 2000,
+                      curve: 'easeOut'
+        });
       }
     }
   },
