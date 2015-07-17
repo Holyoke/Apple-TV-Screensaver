@@ -2,32 +2,50 @@ FamousFramework.component('scruggy:apple-tv', {
   behaviors: {
     '#root':{
       'style':{
-        'background-color': 'grey',
-        'perspective': '1000px'
+        'perspective':'1000px'
       }
     },
     '#rotator-node': {
-      'size':[500, 500],
+      'size': function(contextSize){
+        return [contextSize, contextSize];
+      },
       'align': [0.5, 0.5],
       'mount-point': [0.5, 0.5],
+      'origin': [0.5, 0.5],
       'style': {
         'background': 'red'
-      }
+      },
+      'rotation': function(rotationValue){
+        return [-Math.PI/2.1, 0, rotationValue];
+      },
     },
     '.gallery-item':{
       'size': [100, 100],
       'style': {
-        'background-color': 'blue'
+        'background-color': 'blue',
+        'border': '2px solid black'
       },
-      '$repeat':function() {
-        return ['one',2,3,4, '5'];
+      '$repeat':function(srcs) {
+        return srcs;
       },
-      'position': function($index) {
-        return [Math.random()*500, Math.random()*500];
-      }
+      'position-x': function($index, contextSize) {
+        return Math.random() * contextSize;
+      },
+      'position-y': function($index, contextSize) {
+        return Math.random() * contextSize;
+      },
+      'position-z': function($index, positionZ) {
+        return positionZ[$index];
+      },
+      'rotation': [Math.PI / 2, 0 ,0]
     }
   },
   events: {},
-  states: {},
+  states: {
+    rotationValue: 0,
+    srcs: [1,2,3,4,5],
+    contextSize: 500,
+    positionZ:[]
+  },
   tree: 'apple-tv.html'
 });
